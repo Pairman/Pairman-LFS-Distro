@@ -1,4 +1,4 @@
-Pairman's Linux From Scratch Distribution 11.3 x86_64 20230529 version, supporting only Surface Pro 7+.
+Pairman's Linux From Scratch Distribution 11.3 x86_64, supporting only Surface Pro 7+.
 
 Added many packages and features in addition to the LFS and BLFS book, mainly including UEFI support, microcode for CPU, GPU and WLAN, modifications of multiple scripts, ```mimalloc``` as the default malloc() library.
 
