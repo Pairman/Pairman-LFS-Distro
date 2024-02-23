@@ -13,5 +13,5 @@ Hints on setting up host chroot:
 export LFS="/mnt/distro"
 alias mountlfs="mount -v --bind /dev $LFS/dev; mount -v --bind /dev/pts $LFS/dev/pts; mount -t tmpfs -o nosuid,nodev tmpfs $LFS/dev/shm; mount -vt proc proc $LFS/proc; mount -vt sysfs sysfs $LFS/sys; mount -vt tmpfs tmpfs $LFS/run; mount -B /sys/firmware/efi/efivars $LFS/sys/firmware/efi/efivars"
 alias umountlfs="mountpoint -q $LFS/dev/shm;umount $LFS/{dev/shm,dev/pts,sys/firmware/efi/efivars}; umount $LFS/{sys,proc,run,dev}"
-alias chrootlfs="chroot /mnt/distro /usr/bin/env -i HOME=/root TERM=xterm-256color PS1='(chrootlfs) \u:\w$ ' PATH=/usr/bin:/usr/sbin /bin/bash --login"
+alias chrootlfs="chroot $LFS /usr/bin/env -i HOME=/root TERM=xterm-256color PS1='(chrootlfs) \u:\w$ ' PATH=/usr/bin:/usr/sbin /bin/bash --login"
 ```
