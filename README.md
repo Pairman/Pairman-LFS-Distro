@@ -1,4 +1,4 @@
-Pairman's Linux From Scratch Distribution 11.3 x86_64, supporting only Surface Pro 7+.
+Pairman's Linux From Scratch Distribution 12。1 x86_64, supporting only Surface Pro 7+.
 
 Added many packages and features in addition to the LFS and BLFS book, mainly including UEFI support, microcode for CPU, GPU and WLAN, modifications of multiple scripts, ```mimalloc``` as the default malloc() library.
 
@@ -9,9 +9,9 @@ It should be extracted under ```/mnt/distro```, with a root partition mounted at
 
 Hints on setting up host chroot:
 ```
-# SET UP LFS
-export LFS="/mnt/distro"
-alias mountlfs="mount -v --bind /dev $LFS/dev; mount -v --bind /dev/pts $LFS/dev/pts; mount -t tmpfs -o nosuid,nodev tmpfs $LFS/dev/shm; mount -vt proc proc $LFS/proc; mount -vt sysfs sysfs $LFS/sys; mount -vt tmpfs tmpfs $LFS/run; mount -B /sys/firmware/efi/efivars $LFS/sys/firmware/efi/efivars"
-alias umountlfs="mountpoint -q $LFS/dev/shm;umount $LFS/{dev/shm,dev/pts,sys/firmware/efi/efivars}; umount $LFS/{sys,proc,run,dev}"
-alias chrootlfs="chroot $LFS /usr/bin/env -i HOME=/root TERM=xterm-256color PS1='(chrootlfs) \u:\w$ ' PATH=/usr/bin:/usr/sbin /bin/bash --login"
+# Set up LFS
+export LFS="/mnt/lfs"
+alias mountlfs="mount -v --bind /dev $LFS/dev; mount -vt devpts devpts -o gid=5,mode=0620 $LFS/dev/pts; mount -vt proc proc $LFS/proc; mount -vt sysfs sysfs $LFS/sys; mount -vt tmpfs tmpfs $LFS/run; mount -t tmpfs -o nosuid,nodev tmpfs $LFS/dev/shm"
+alias umountlfs="umount $LFS/{dev/shm,dev/pts}; umount $LFS/{sys,proc,run,dev}"
+alias chrootlfs="chroot $LFS /usr/bin/env -i HOME=/root TERM='$TERM' PS1='[\u@lfs-chroot \W]\$ ' PATH=/usr/bin:/usr/sbin MAKEFLAGS='-j$(( 2 * $(nproc) ))' TESTSUITEFLAGS='-j$(( 2 * $(nproc) ))' /bin/bash --login"
 ```
